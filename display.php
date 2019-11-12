@@ -158,7 +158,7 @@ try
     {
         echo '<script>alert("No more pictures to view")</script>';
         $_SESSION['pos'] = $_SESSION['pos'] - 5;
-        echo '<script> window.location= "index.php"</script>';
+        echo '<script> window.location= "home.php"</script>';
     }
 }
 catch(PODEXception $e)
@@ -167,12 +167,12 @@ catch(PODEXception $e)
 }
 ?>
 <hr>
-<form method = "post" action = "index.php">
+<form method = "post" action = "home.php">
 <input type = "submit" value = "next" name  = "next" class = "btn btn-primary">
 </form>
 <?php if($_SESSION['pos'] > 0)
 {?>
-<form method = "post" action = "index.php">
+<form method = "post" action = "home.php">
 <input type = "submit" value = "prev" name  = "prev" class = "btn btn-primary">
 </form>
 <?php }?>

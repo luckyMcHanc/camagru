@@ -21,14 +21,13 @@ require("includes/upload.php");
 <body>
     <div class="container">
     <div class = "row">
+    <br />
+    <?php require("upload_m.php"); ?>
     <form method = "post" action = "camera.php">
-
-     <br>
-     <br>
-     <br>
+    
     <div class="container">
     <div class = "center-block">
-    <video  id="video" autoplay>Something went wrong while streaming</video>
+    <video class="container-fluid"  id="video" autoplay>Something went wrong while streaming</video>
 </div>
 </div>
 <br>
