@@ -15,3 +15,6 @@ Don't have an account? <a href="signup.php">sign_up</a>
 </div>
 </form>
 </main> 
+<?php
+    require('footer.html');
+    ?>

@@ -1,5 +1,9 @@
 <?php
-session_start();
+require ("header.php");
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+}
 if (!isset($_SESSION['login']))
 {
     echo '<script>window.location="login.php"</script>';
@@ -18,19 +22,13 @@ elseif(!isset($_SESSION['url']))
     <title>Document</title>
 </head>
 <body>
-      
-<select id="filters">
-    <option value="none">Default</option>
-    <option value="grayscale(100%)">Grayscale</option>
-    <option value="sepia(100%)">Sepia</option>
-    <option value="blur(10px)">Blur</option>
-    <option value="hue-rotate(90deg)">Hue</option>
-    <option value="invert(100%)">Invert</option>
-    <option value="contrast(200%)">contrast</option>
-    </select>
-
+<br />
+<div class = "container">
     <form method = "POST" >
-    <select name="stickers" id="stickers">
+    <div class = "row">
+        <div class = "col-md-6">
+            <div class="form-group">
+    <select name="stickers" id="stickers" class="form-control">
     <option value="none">Default</option>
     <option value="./stickers/sticker1.png">Greentoon</option>
     <option value="./stickers/sticker2.png">Linkedin</option>
@@ -39,19 +37,19 @@ elseif(!isset($_SESSION['url']))
     <option value="./stickers/sticker5.png">Hippy</option>
     <option value="./stickers/sticker7.png">Linux</option>
     <option value="./stickers/sticker8.png">Linux Drunk</option>
-    
    <input type = "hidden" id = "url" name = "url"> 
-   <input type ="submit" name = "apply" value  = "Apply">
     </select>
+            </div>
+        </div>
+        <div class = "col-md-6">
+        <input type ="submit" name = "apply" value  = "Apply" class = "btn btn-secondary">
+        </div>
+    </div>
     </form>
-    <button id="clear">Clear</button>
-    <canvas id="canvas"></canvas>
-    </div>
-    <div class="bottom-container">
-    <div id="thumbnail"></div>
-    </div>
-   
-<?php
+</div> 
+</body> 
+
+ <?php
 
   
     $target = $_SESSION['url'];
@@ -61,38 +59,63 @@ elseif(!isset($_SESSION['url']))
    {
     $image = "output".date('Y-m-dH-i-s').".jpeg";
     imagejpeg(imagecreatefromstring(file_get_contents($target)), "uploads/".$image);
-    echo '<img src = "uploads/'.$image.'">'; 
+   
     $_SESSION['url'] = $image;
     $_SESSION['done'] = "1";
    }
-   if (isset($_POST['apply']))
-{
+   $image =  $_SESSION['url'];
 
-  $selected = $_POST["stickers"];
-   if (strcmp($selected, "none"))
-   {
-       
-       $im = imagecreatefromjpeg("uploads/".$_SESSION['url']);
-       $stamp = imagecreatefrompng($selected);
-       
-       $marge_right = 10;
-       $marge_bottom = 10;
-       $sx = imagesx($stamp);
-       $sy = imagesy($stamp);
-       
-       imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
-       
-       $out=$_SESSION['url'];
-       
-       imagejpeg($im,"uploads/".$out);
-       imagedestroy($im);
-   }
+   ?>
+    <div class="container">
+        <div class = "row">
+            <div class = "col-md-6">
+                <div class="thumbnail">
+                    <img  src = <?php echo "uploads/".$image; ?> class = "img-responsive">
+                </div>
+            </div>
+        </div>
+        <hr style="opacity:0">
+        <div class = "row">
+            <form method="post">
+            <div class = "col-md-6">
+                    <div class = "form-group">
+                        <input type="submit" value = "Upload" name ="data" class = "btn btn-secondary">    
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+   <?php  
+   if (isset($_POST['apply']))
+    {
+        $selected = $_POST["stickers"];
+        if (strcmp($selected, "none"))
+        {
+            $im = imagecreatefromjpeg("uploads/".$_SESSION['url']);
+            $stamp = imagecreatefrompng($selected);
+            
+            $marge_right = 10;
+            $marge_bottom = 10;
+            $sx = imagesx($stamp);
+            $sy = imagesy($stamp);
+            
+            imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+            
+            $out=$_SESSION['url'];
+            
+            imagejpeg($im,"uploads/".$out);
+            imagedestroy($im);
+            echo '<script>window.location = "discam.php"</script>';
+        }
    else
    {
        $out = $_SESSION['url'];
    }
-  
-  copy("uploads/".$out, "images/".$out);
+    }
+   if (isset($_POST['data']))
+   {
+    $out = $_SESSION['url'];
+    copy("uploads/".$out, "images/".$out);
   
           try
           {
@@ -111,4 +134,8 @@ elseif(!isset($_SESSION['url']))
           }
     }
 
+    require('footer.html');
+    
 ?>
+
+</html>

@@ -12,7 +12,10 @@
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
                 <div class = "header_right">
                 <?php
-                session_start();
+                    if(!isset($_SESSION)) 
+                    { 
+                        session_start(); 
+                    } 
                     if(isset($_SESSION['login']))
                     {
                     ?>

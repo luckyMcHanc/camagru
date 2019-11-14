@@ -15,31 +15,30 @@ require("includes/signup_inc.php");
     <br />
     <div class="container" id="wrap">
 	  <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3 container-fluid">
             <h1>Register</h1>
             <p>Create your account</p>
-            <br />
             <br />
                 <form method  = "post" accept-charset="utf-8" class="form" role="form">
             <div class="row">
                 <div class="col-xs-6 col-md-6">
-                    <input type="text" class="form-control input-lg" name="name" placeholder="Full Name" autocomplete="on"required><br>
+                    <input type="text" class="form-control input-lg" name="name" placeholder="Full Name" maxlength = "40" autocomplete="on"required><br>
                     </div>
                     <div class="col-xs-6 col-md-6">
-                    <input type="text" class="form-control input-lg" name="username" placeholder="Username" autocomplete="on" required><br>
+                    <input type="text" class="form-control input-lg" name="username" placeholder="Username" maxlength = "15" autocomplete="on" required><br>
                     </div>
                 </div>
-                    <input type="text" class="form-control input-lg" name="email" placeholder="email" autocomplete="on" required><br>
-                    <input type="password" class="form-control input-lg" name="password" placeholder="Password" autocomplete="on" required><br>
-                    <input type="password" class="form-control input-lg" name="repassword" placeholder="Retype Password" autocomplete="off" required><br>
+                    <input type="text" class="form-control input-lg" name="email" placeholder="email" maxlength = "40" autocomplete="on" required><br>
+                    <input type="password" class="form-control input-lg" name="password" placeholder="Password" maxlength = "40" autocomplete="on" required><br>
+                    <input type="password" class="form-control input-lg" name="repassword" placeholder="Retype Password" maxlength = "40" autocomplete="off" required><br>
                     <label class="radio-inline">
-                        <input type="radio" class="checkbox-inline" name="gender" value="male">Male
+                        <input type="radio" class="checkbox-inline" name="gender" value="male"> Male
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" class="checkbox-inline" name="gender" value="female">Female
+                        <input type="radio" class="checkbox-inline" name="gender" value="female"> Female
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" class="checkbox-inline" name="gender" value="other">Other<br>
+                        <input type="radio" class="checkbox-inline" name="gender" value="other"> Other<br>
                     </label>
                     <br />
                     <br />
@@ -54,6 +53,10 @@ require("includes/signup_inc.php");
         </div>
     </div>
 </div>
+<br />
 </main>
 </body>
+<?php
+    require('footer.html');
+    ?>
 </html>

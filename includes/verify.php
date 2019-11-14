@@ -24,13 +24,13 @@ try
                 $del = $con->prepare("DELETE FROM token_t WHERE token = '$user'");
                 if ($del->execute())
                 {
-                    echo "email verified";
+                    echo "email verified. Close the tab and go to Camagru website!";
                 }
             }
         }
         else
         {
-            echo "email already verified";
+            echo "link no longer available. Close the tab and go to Camagru website!";
         }
         $con = null;
     }

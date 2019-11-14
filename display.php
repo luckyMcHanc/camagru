@@ -30,12 +30,12 @@ try
         if (isset($_POST['next']))
         {
             $_SESSION['pos'] = $_SESSION['pos'] + 5;
-            echo '<script> window.location= "index.php"</script>';
+            echo '<script> window.location= "home.php"</script>';
         }
         if (isset($_POST['prev']))
         {
             $_SESSION['pos'] = $_SESSION['pos'] - 5;
-            echo '<script> window.location= "index.php"</script>';
+            echo '<script> window.location= "home.php"</script>';
         }
         $pos = $_SESSION['pos'];
         $sql = $con->prepare("SELECT * FROM images ORDER BY `time` DESC LIMIT $pos, 5");
@@ -55,43 +55,24 @@ try
                         </div>
                         </div>
                         </div>
-                    <?php 
-                    $like = $con->prepare("SELECT COUNT(id) as co FROM likes WHERE imageid = ?");
-                    if ($like->execute([$v['imageid']]))
-                    {
-                        $res = $like->fetchAll();
-                        echo "number of likes: ".$res[0]["co"];
-                    }
-                    ?>
-                    <div class = "">
+                    <!-- <div id = "" -->
+                    number of likes: <span id = "<?php echo $v['imageid']?>"> 
                         <?php
-                        if (isset($_SESSION['login']))
-                        {
-                        $try = $con->prepare("SELECT id FROM likes WHERE imageid = ?");
-                        $a = array( $v['imageid']);
-                        if ($try->execute($a) === TRUE)
-                        {
-                           $res = $try->fetchAll();
-                           if (empty($res))
-                           {
-                               ?>
-                            <form method = "post">
-                            <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
-                            <button name = "like" class = "btn btn-primary">like</button>
-                        </form>
-                            <?php
-                            }
-                        else
-                            {   
-                                ?>
-                                <form method = "post">
-                                <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
-                                <button name = "like" class = "btn btn-warning">unlike</button>
-                            </form>
-                                <?php
-                            }
-                        }
-
+                             $like = $con->prepare("SELECT COUNT(id) as co FROM likes WHERE imageid = ?");
+                             if ($like->execute([$v['imageid']]))
+                             {
+                                 $res = $like->fetchAll();
+                                 echo $res[0]["co"];
+                             }
+                        ?>
+                </span> 
+                    <div class = "">
+                      
+                            <!-- <form name = "like"> -->
+                                <input type = "hidden" id = "id" value = "<?php echo $v['imageid']?>">
+                                <input type = "button" id = "like" class = "btn btn-primary" onclick = "likes(<?php echo $v['imageid']?>)" value = "like">
+                            <!-- </form> -->
+                         <?php
                         $try = $con->prepare("SELECT userid, comments FROM comments WHERE imageid = ? ");
                         $a = array( $v['imageid']);
                         if ($try->execute($a) === TRUE)
@@ -110,7 +91,7 @@ try
                 <div class="comment-content col-md-11 col-sm-10">
                     <h6 class="small comment-meta"><a href="#"><?php echo $com["userid"]?></a> </h6>
                     <div class="comment-body">
-                        <p>
+                        <p id>
                         <p> <?php echo $com["comments"]?> </p>
                         </p>
                     </div>
@@ -119,7 +100,7 @@ try
     </div>
     </div>
     </div>
-                               <?php
+                            <?php
                            }
                         }
                         ?>
@@ -127,7 +108,7 @@ try
                         <form method = "post">
                             <div class="form-group">
                             <label for="comment">Comment:</label>
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                            <textarea class="form-control" rows="5" name="comment"></textarea>
                             <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
                             <input type = "hidden" name = "userid" value = "<?php echo $v['userid']?>">
                             </div>
@@ -140,20 +121,19 @@ try
                         <?php
                             if (!strcmp($_SESSION['login'], $v['userid']))
                             {
-                        ?>
-                    <div class = "container">
-                        <form method = "post">
-                        <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
-                        <button name = "delete" class = "btn btn-danger">Delete Image</button>
-                        </form>
-                    </div>
-                    <?php
+                                ?>
+                            <div class = "container">
+                                <form method = "post">
+                                <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
+                                <button name = "delete" class = "btn btn-danger">Delete Image</button>
+                                </form>
+                            </div>
+                            <?php
                             }
                 }
             }
             }
         }
-    }
     else
     {
         echo '<script>alert("No more pictures to view")</script>';
@@ -177,5 +157,5 @@ catch(PODEXception $e)
 </form>
 <?php }?>
 </div>
-
+<script src="js/likes.js"></script>
 </body>

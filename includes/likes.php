@@ -1,30 +1,48 @@
 <?php
 
-if(isset($_POST['like']))
-{
-    include_once('connect.php');
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+}
 
+if(isset($_GET['id']))
+{
+    $id = $_GET['id'];
+
+    //echo $_GET['id'];
+  //  die();
+    require '../includes/connect.php';
     try{
-        $id = $_POST['id'];
         $try = $con->prepare("SELECT id FROM likes WHERE username = ? AND imageid = ?");
         $a = array($_SESSION['login'], $id);
         if ($try->execute($a) === TRUE)
         {
-           $res = $try->fetchAll();
-           if (empty($res))
-           {
+            $res = $try->fetchAll();
+            if (empty($res))
+            {
                 
                 $sql = $con->prepare("INSERT INTO likes (username, imageid) values (?,?)");
                 $arr = array($_SESSION['login'], $id);
                 $sql->execute($arr);
-                echo '<script>window.location="home.php"</script>';
+                $like = $con->prepare("SELECT COUNT(id) as co FROM likes WHERE imageid = ?");
+                if ($like->execute([$id]))
+                {
+                    $res = $like->fetchAll();
+                    echo $res[0]["co"];
+                }
             }
         else
             {   
                 $sql = $con->prepare("DELETE FROM likes WHERE username = ? AND imageid = ?");
                 $arr = array($_SESSION['login'], $id);
                 $sql->execute($arr);
-                echo '<script>window.location="home.php"</script>';
+                $like = $con->prepare("SELECT COUNT(id) as co FROM likes WHERE imageid = ?");
+                if ($like->execute([$id]))
+                {
+                    $res = $like->fetchAll();
+                    echo $res[0]["co"];
+                }
+               // echo '<script>window.location="home.php"</script>';
             }
         }
     }
@@ -33,12 +51,13 @@ if(isset($_POST['like']))
         echo $e;
     }
     $con = null;
+    unset($_GET['id']);
 }
 
 if (isset($_POST['commet']))
 {
     $id = $_POST['id'];
-    $comment = strip_tags($_POST['comment']);
+    $comment = $_POST['comment'];
     $us = $_POST['userid'];
 
     if (empty($comment))
@@ -80,7 +99,7 @@ if (isset($_POST['delete']))
     $del = $_POST['id'];
     include_once('connect.php');
     $sql = $con->prepare("DELETE FROM images WHERE imageid = ?");
-    $sql = $con->prepare("DELETE FROM comments WHERE imageid = ?");
+   // $sql = $con->prepare("DELETE FROM comments WHERE imageid = ?");
 
     if ($sql->execute([$del]))
     {

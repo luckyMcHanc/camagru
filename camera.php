@@ -1,6 +1,9 @@
 <?php
   
-session_start();
+  if(!isset($_SESSION)) 
+  { 
+      session_start(); 
+  }
 if (!isset($_SESSION['login']))
 {
     echo '<script>window.location="login.php"</script>';
@@ -43,21 +46,18 @@ require("includes/upload.php");
     </div>
   </div>
     <?php
-    
-  //  session_start();
     if (isset($_POST["sub"]))
     {
 
       $_SESSION['url'] = $_POST["url"];
-
-   //   echo $_SESSION['url'];
-     // require 'discam.php';
-     // dis();
      $_SESSION['done'] = "0";
       echo '<script>window.location= "discam.php"</script>';
     }
     ?>
-    <script src="capture.js"></script>
+    <script src="js/capture.js"></script>
 </body>
+<?php
+    require('footer.html');
+    ?>
 
 </html>

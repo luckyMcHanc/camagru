@@ -1,6 +1,9 @@
 <?php
 
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 if (isset($_POST['email_change']))
 {
     include_once("connect.php");
