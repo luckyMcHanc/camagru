@@ -11,10 +11,10 @@ let width = 500,
   const thumbnail = document.getElementById('thumbnail');
   const addfilter = document.getElementById('filters');
   const clear = document.getElementById('clear');
-  //const addsticker = document.getElementById('stickers'); 
+  //const addsticker = document.getElementById('stickers');
 
   navigator.mediaDevices.getUserMedia({video: true, audio: false})
-  
+
   .then(function(stream)
   {
    video.srcObject = stream;
@@ -39,25 +39,25 @@ let width = 500,
       streaming = true;
     }
   }, false)
-  
+
   capture.addEventListener('click', function(e)
   {
     captureImage();
     e.preventDefault();
   }, false);
 
-  addfilter.addEventListener('change', function(e)
-  {
-   filter = e.target.value;
-   video.style.filter = filter;
-   e.preventDefault(); 
-  });
+  // addfilter.addEventListener('change', function(e)
+  // {
+  //  filter = e.target.value;
+  //  video.style.filter = filter;
+  //  e.preventDefault();
+  // });
 
   // addsticker.addEventListener('change', function(e)
   // {
   //  sticker = e.target.value;
   //  overlay.src = sticker;
-  //  e.preventDefault(); 
+  //  e.preventDefault();
   // });
 
   // clear.addEventListener('click', function(e)
@@ -75,23 +75,23 @@ let width = 500,
 
   function captureImage()
   {
-    
+
     navigator.mediaDevices.getUserMedia({video: false, audio: false})
     const context = canvas.getContext('2d');
-   
+
     if (width && height)
     {
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
 
-     
+
       const imgUrl = canvas.toDataURL('uploads/jpeg');
       console.log(imgUrl);
       const image = document.createElement('img');
       image.setAttribute('src', imgUrl);
 
-       
+
     //  image.style.filter = filter;
       //image.overlay.src = sticker;
       thumbnail.appendChild(image);
@@ -104,13 +104,12 @@ let width = 500,
     //  alert("dfgdfgfd");
       //document.write(imgUrl);
 
-  
+
       video.srcObject = stream;
       video.pause();
       //  vid.pause();
        // vid.src = "";
        // localstream.stop();
-     
+
     }
   }
-  

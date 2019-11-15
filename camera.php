@@ -1,8 +1,8 @@
 <?php
-  
-  if(!isset($_SESSION)) 
-  { 
-      session_start(); 
+
+  if(!isset($_SESSION))
+  {
+      session_start();
   }
 if (!isset($_SESSION['login']))
 {
@@ -18,33 +18,46 @@ require("includes/upload.php");
   <meta charset="UTF-8">
   <title>Document</title>
   <!-- <link rel="stylesheet" href="css/filters.css" /> -->
-  <link rel="stylesheet" href="css/main.css" />
-  
+  <!-- <link rel="stylesheet" href="css/main.css" /> -->
+
 </head>
 <body>
     <div class="container">
-    <div class = "row">
     <br />
     <?php require("upload_m.php"); ?>
     <form method = "post" action = "camera.php">
-    
-    <div class="container">
-    <div class = "center-block">
-    <video class="container-fluid"  id="video" autoplay>Something went wrong while streaming</video>
-</div>
-</div>
-<br>
+            <div class = "row">
+                <div class = "col-md-6">
+                    <video id="video" autoplay class="embed-responsive">Something went wrong while streaming</video>
+                    <div class = "form-group">
     <button id="capture" name = "sub"class = "btn btn-primary">
     Take Picture
     </button>
-  </div>
+    </div>
+                </div>
+    <div class = "col-md-6" style="overflow-y: scroll; height:550px;">
+      <?php
+        $dirname = "uploads/";
+        $images = glob($dirname."*.jpeg");
+        foreach($images as $image) {
+          ?>
+          <hr style = "opacity:0;">
+          <img src= "<?php echo $image ?>" class="img-thumbnail float-left" style="width: 300px;height: 300px;display: block;">
+          <br>
+          <?php
+      }
+    ?>
+        </div>
+      </div>
+
+<br>
     <input type = "hidden" id = "url" name = "url">
   </form>
+
     <canvas  id="canvas"></canvas>
 
     <div class="center-block" id="thumbnail"></div>
     </div>
-  </div>
     <?php
     if (isset($_POST["sub"]))
     {
@@ -59,5 +72,4 @@ require("includes/upload.php");
 <?php
     require('footer.html');
     ?>
-
 </html>

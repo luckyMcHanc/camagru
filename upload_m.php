@@ -13,7 +13,7 @@ if (isset($_SESSION['login']))
    <br>
     <label >Select Image
         <input type = "file" name="fileToUpload" id="fileToUpload" size="30" >
-    </label>   
+    </label>
     Select Sticker
     <select name="stickers" id="stickers">
         <option value="none">Default</option>
@@ -28,8 +28,6 @@ if (isset($_SESSION['login']))
     <input type="submit" value="Upload Image" name="submit">
     </form>
         </div>
-    <div>
-
     <?php
 }
 ?>

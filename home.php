@@ -1,10 +1,9 @@
- <?php 
+<?php 
 //require ("includes/upload.php");
 require ("header.php");
-?>
-<body>
-    <br />
-    <?php
+?> <body>
+     <br / >
+     <?php
     require('display.php');
 if(isset($_POST['submit']))
 {
@@ -31,15 +30,15 @@ if(isset($_POST['submit']))
         $marge_bottom = 10;
         $sx = imagesx($stamp);
         $sy = imagesy($stamp);
-        
+
         imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
 
         imagejpeg($im,"uploads/".$out);
         imagedestroy($im);
-        
+
         $images = "output".date('Y-m-dH-i-s').".jpeg";
         copy("uploads/".$out, "images/".$images);
-  
+
         try
         {
             require 'includes/connect.php';
@@ -58,9 +57,8 @@ if(isset($_POST['submit']))
        //echo "<img src = $out>";
     }
 }
-
-?>
+?> 
 </body>
-<?php
+ <?php
     require('footer.html');
     ?>

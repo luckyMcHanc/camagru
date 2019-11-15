@@ -1,13 +1,13 @@
 <?php
 
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if(!isset($_SESSION))
+{
+    session_start();
+}
 if (isset($_POST['email_change']))
 {
     include_once("connect.php");
-        
+
         $change = $_POST['email'];
         $userid = $_SESSION['login'];
         if (!filter_var($change, FILTER_VALIDATE_EMAIL))
@@ -25,7 +25,7 @@ if (isset($_POST['email_change']))
                 {
                     echo '<script>alert("Your email has been change!")</script>';
                     echo '<script>window.location = "changedetails.php"</script>';
-         
+                    mail($change, "Email Changed", "Your email has been changed");
                 }
                 else
                 {
@@ -52,8 +52,8 @@ if (isset($_POST['email_change']))
         $userid = $_GET['v'];
         $password = $_POST['newpassword'];
         $conpass = $_POST['retypepassword'];
-        
-        
+
+
         if (strcmp($password, $conpass))
         {
             echo '<script>alert("Passwords not the same!")</script>';
@@ -73,9 +73,9 @@ if (isset($_POST['email_change']))
                 include_once("connect.php");
                 $sql = $con->prepare("SELECT userid FROM token_t WHERE token = ?");
                 $sql->execute([$userid]);
-                
+
                 $res = $sql->fetchAll();
-                
+
                 $useridd = ($res[0]['userid']);
 
                 if (!empty($useridd))
@@ -92,7 +92,7 @@ if (isset($_POST['email_change']))
                     if ($del->execute())
                     {
                         echo '<script>alert("password updated!")</script>';
-                    } 
+                    }
                 }
                 else
                 {

@@ -12,14 +12,14 @@
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
                 <div class = "header_right">
                 <?php
-                    if(!isset($_SESSION)) 
-                    { 
-                        session_start(); 
-                    } 
+                    if(!isset($_SESSION))
+                    {
+                        session_start();
+                    }
                     if(isset($_SESSION['login']))
                     {
                     ?>
-                    
+
                     <ul class="navbar-nav">
                         <li class="nav-item active">
                         <a class="nav-link" href="home.php">HOME</a>
@@ -51,12 +51,13 @@
                         <a class="nav-link"  href="signup.php">SIGNUP</a>
                         </li>
                     </ul>
-                    <?php 
+                    <?php
                     }
-                ?>            
+                ?>
                         </div>
-                    </div>
-                </div>
-            </nav>
+                      </nav>
+                  </div>
+              </div>
         </div>
     </header>
+  </body>
