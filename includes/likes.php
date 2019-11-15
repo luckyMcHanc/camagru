@@ -95,6 +95,9 @@ if (isset($_POST['commet']))
 if (isset($_POST['delete']))
 {
     $del = $_POST['id'];
+
+   // echo $del;
+   // die();
     include_once('connect.php');
     $sql = $con->prepare("DELETE FROM images WHERE imageid = ?");
    // $sql = $con->prepare("DELETE FROM comments WHERE imageid = ?");
@@ -102,12 +105,12 @@ if (isset($_POST['delete']))
     if ($sql->execute([$del]))
     {
         echo '<script>alert("Deleted")</script>';
-        echo '<script>window.location="home.php"</script>';
+        echo '<script>window.location="camera.php"</script>';
     }
     else
     {
         echo '<script>alert(Could not delete)</script>';
-        echo '<script>window.location="home.php"</script>';
+        echo '<script>window.location="camera.php"</script>';
     }
 }
 ?>

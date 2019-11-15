@@ -48,8 +48,6 @@ try
         if ($pos  > 0  && $pos <= $x)
         {
         $pos = ($pos - 1) * 5;
-      //  echo $pos;
-
         $sql = $con->prepare("SELECT * FROM images ORDER BY `time` DESC LIMIT $pos, 5");
         if ($sql->execute() === TRUE)
         {
