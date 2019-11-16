@@ -5,6 +5,8 @@ include_once 'database.php';
 try{
     $con = new PDO("mysql:host=$DB_DSN", $DB_USER, $DB_PASSWORD);
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sqld = $con->prepare("DROP DATABASE camagru");
+    $sqld->execute();
     $sql = $con->prepare("CREATE DATABASE camagru");
     $sql->execute();
     $con = null;
@@ -66,5 +68,5 @@ try{
 }
 catch(PDOException $e)
 {
-    echo $usertable."<br>" . $e;
+    echo $e;
 }

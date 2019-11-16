@@ -44,8 +44,9 @@ try
     //     }
     //     $pos = $_SESSION['pos'];
         $pos = isset($_GET["page"]) ? $_GET["page"] : 1;
-
-        if ($pos  > 0  && $pos <= $x)
+        
+       // echo $x;
+        if (($pos  > 0  && $pos <= $x) || $x == 0)
         {
         $pos = ($pos - 1) * 5;
         $sql = $con->prepare("SELECT * FROM images ORDER BY `time` DESC LIMIT $pos, 5");
@@ -62,9 +63,11 @@ try
                     <p> Posted By: <?php 
                         $post = $con->prepare("SELECT * FROM users WHERE id = ?");
                         $pers = $v['userid'];
+                      //  echo $pers;
                         if ($post->execute([$pers]))
                         {
                             $p = $post->fetchAll();
+                            print_r($p);
                             echo $p[0]['userid']." Date: ".$v['time']; 
                         }
                     ?>
