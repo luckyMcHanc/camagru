@@ -18,7 +18,7 @@ try
 
         if (!empty($userid))
         {
-            $update = $con->prepare("UPDATE users SET verified = 1 WHERE userid = ? AND verified = 0");
+            $update = $con->prepare("UPDATE users SET verified = 1 WHERE id = ? AND verified = 0");
             if ($update->execute([$userid]) === TRUE)
             {
                 $del = $con->prepare("DELETE FROM token_t WHERE token = '$user'");

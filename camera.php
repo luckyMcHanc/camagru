@@ -26,14 +26,17 @@ require("includes/likes.php")
     <div class="container">
     <br />
     <?php require("upload_m.php"); ?>
-    <form method = "post" action = "camera.php">
-            <div class = "row">
-                <div class = "col-md-6">
+    <div class = "row">
+      <div class = "col-md-6">
+        <form method = "post" action = "camera.php">
                     <video id="video" autoplay class="embed-responsive">Something went wrong while streaming</video>
                     <div class = "form-group">
-    <button id="capture" name = "sub"class = "btn btn-primary">
+    <button id="capture" name = "sub" class = "btn btn-primary">
     Take Picture
     </button>
+                  
+    <input type = "hidden" id = "url" name = "url">
+  </form>
     </div>
                 </div>
     <div class = "col-md-6" style="overflow-y: scroll; height:550px;">
@@ -66,70 +69,6 @@ require("includes/likes.php")
                 </button>
               </form>
                 </div>
-  
-  <!-- <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
-        </a>
-  </div> -->
-  <!-- <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/sesveuG_rNo/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/AvhMzHwiE_0/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/2gYsZUmockw/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EMSDtjVHdQ8/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/8mUEy0ABdNE/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/G9Rfc1qccH4/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aJeH0KcFkuc/400x300" alt="">
-        </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="#" class="d-block mb-4 h-100">
-          <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" alt="">
-        </a>
-  </div> -->
-
-           
-          <!-- <form method = "POST">
-            <input type = "hidden" value="<?php echo $image['imageid']; ?>" name  = "id">  
-            <div class = "col-md-7">
-            <input type = "submit" name = "delete" value = "DELETE" class = "btn btn-secondary">
-            </div>
-          </form> -->
             <?php
         }
           
@@ -151,9 +90,6 @@ require("includes/likes.php")
       </div>
 
 <br>
-    <input type = "hidden" id = "url" name = "url">
-  </form>
-
     <canvas  id="canvas"></canvas>
 
     <div class="center-block" id="thumbnail"></div>

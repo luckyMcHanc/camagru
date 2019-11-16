@@ -19,7 +19,7 @@ if (isset($_POST['email_change']))
         {
             try
             {
-                $sql = $con->prepare("UPDATE users SET email = ? WHERE userid = ?");
+                $sql = $con->prepare("UPDATE users SET email = ? WHERE id = ?");
                 $arr = array($change, $userid);
                 if ($sql->execute($arr) === TRUE)
                 {
@@ -29,7 +29,7 @@ if (isset($_POST['email_change']))
                 }
                 else
                 {
-                    echo '<script>alert("Your email has been change. Check your inbox for verification")</script>';
+                    echo '<script>alert("no changes made")</script>';
                 }
                 $con = null;
             }
@@ -39,6 +39,35 @@ if (isset($_POST['email_change']))
             }
         }
     }
+
+    if (isset($_POST['user']))
+{
+    include_once("connect.php");
+
+        $change = $_POST['username'];
+        $userid = $_SESSION['login'];
+       
+            try
+            {
+                $sql = $con->prepare("UPDATE users SET userid = ? WHERE id = ?");
+                $arr = array($change, $userid);
+                if ($sql->execute($arr) === TRUE)
+                {
+                    echo '<script>alert("Your username has been change!")</script>';
+                    echo '<script>window.location = "changedetails.php"</script>';
+                 //   mail($change, "Email Changed", "Your email has been changed");
+                }
+                else
+                {
+                    echo '<script>alert("no changes")</script>';
+                }
+                $con = null;
+            }
+            catch(PDOException $e)
+            {
+                    echo "erro".$e;
+            }
+        }
     if (isset($_POST['update']))
     {
         function validPass($password)
@@ -115,7 +144,7 @@ if (isset($_POST['email_change']))
             if (!strcmp($cha, "yes"))
             {
 
-                $sql = $con->prepare("UPDATE users SET notific = 1 WHERE userid = ?");
+                $sql = $con->prepare("UPDATE users SET notific = 1 WHERE id = ?");
                 if ($sql->execute([$_SESSION['login']]))
                 {
                     echo '<script>alert("Infomation Changed.!")</script>';
@@ -123,7 +152,7 @@ if (isset($_POST['email_change']))
             }
             else
             {
-                $sql = $con->prepare("UPDATE users SET notific = 0 WHERE userid = ?");
+                $sql = $con->prepare("UPDATE users SET notific = 0 WHERE id = ?");
                 if ($sql->execute([$_SESSION['login']]))
                 {
                     echo '<script>alert("Infomation Changed.!")</script>';

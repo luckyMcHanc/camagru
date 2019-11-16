@@ -26,7 +26,7 @@
                 {
                     if ($pass['verified'] == 1)
                     {
-                        $_SESSION['login'] = $pass['userid'];
+                        $_SESSION['login'] = $pass['id'];
                         $_SESSION['email'] = $pass['email'];
                         echo '<script>alert("Password Correct")</script>';
                         echo '<script>window.location = "home.php" </script>';

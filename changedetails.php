@@ -30,6 +30,21 @@ $email = $_SESSION['email'];
 
         <hr style = "opacity:0;">
         <hr style = "opacity:0;">
+    <div class = "container">
+        <form method = "POST">
+        <div class = "row">
+            <div class="col-md-6">
+                <input type="text" class="form-control input-lg" name = "username" placeholder="enter new username" required>
+        </div>
+        <div class = "col-md-6">
+                <input type = "submit" name = "user" value = "change username" class="btn btn-secondary">
+            </div>
+            </div>
+        </form>
+        </div>
+
+        <hr style = "opacity:0;">
+        <hr style = "opacity:0;">
         <div class = "container">
     <form method = "POST" action = "#">
             <div class = "row">

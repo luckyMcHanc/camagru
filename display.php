@@ -59,6 +59,15 @@ try
                     ?>
             <div class="row">
                 <div class="col-md-4">
+                    <p> Posted By: <?php 
+                        $post = $con->prepare("SELECT * FROM users WHERE id = ?");
+                        $pers = $v['userid'];
+                        if ($post->execute([$pers]))
+                        {
+                            $p = $post->fetchAll();
+                            echo $p[0]['userid']." Date: ".$v['time']; 
+                        }
+                    ?>
                     <div class="thumbnail">
                         <img src="<?php  echo $v['target']?>" alt="<?php  echo $v['image']?>" style="width: 500px;height: 300px;display: block;" class="img-thumbnail">
                     </div>
@@ -80,11 +89,17 @@ try
                              }
                         ?>
                 </span>
-                <div class="">
+                <hr style="opacity : 0;">
+                <div class="row">
+                    <div class="col-md-4">
                     <!-- <form name = "like"> -->
                     <input type="hidden" id="id" value="<?php echo $v['imageid']?>">
+                    <div class = "form-grop"> 
                     <input type="button" id="like" class="btn btn-primary" onclick="likes(<?php echo $v['imageid']?>)" value="like">
+                    </div>
                     <!-- </form> -->
+                    </div>
+                </div>
                     <?php
                         $try = $con->prepare("SELECT userid, comments FROM comments WHERE imageid = ? ");
                         $a = array( $v['imageid']);
@@ -93,6 +108,7 @@ try
                            foreach($try->fetchAll() as $com)
                            {
                                ?>
+                        <hr style="opacity : 0;">
                         <div class="container">
                             <div class="row">
                                 <div class="comments col-md-9" id="comments">
@@ -102,7 +118,18 @@ try
                                             <a href=""><img class="mx-auto rounded-circle img-fluid" src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1" alt="avatar"></a>
                                         </div>
                                         <div class="comment-content col-md-11 col-sm-10">
-                                            <h6 class="small comment-meta"><a href="#"><?php echo $com["userid"]?></a> </h6>
+                                            <h6 class="small comment-meta"><a href="#"><?php 
+                                            $nam = $con->prepare("SELECT userid FROM users WHERE id = ?");
+                                            $idd = $com["userid"];
+                                           // echo $idd;
+                                            if ($nam->execute([$idd]))
+                                            {
+                                                $res = $nam->fetchAll();
+                                               // print_r ($res);
+                                                echo $res[0]["userid"];
+                                            }
+                                            ?>
+                                        </a> </h6>
                                             <div class="comment-body">
                                                 <p>
                                                     <?php echo $com["comments"]?>
@@ -198,6 +225,5 @@ catch(PODEXception $e)
                       </div>
                   </div>
               </div>
-                </div>
                 <script src="js/likes.js"></script>
 </body>
