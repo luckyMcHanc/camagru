@@ -78,7 +78,7 @@ if (isset($_POST['email_change']))
                 }
             }
         }
-        $userid = $_GET['v'];
+        $userid = isset($_GET['v']) ? $_GET['v'] : $_SESSION['email'];
         $password = $_POST['newpassword'];
         $conpass = $_POST['retypepassword'];
 
@@ -105,7 +105,7 @@ if (isset($_POST['email_change']))
 
                 $res = $sql->fetchAll();
 
-                $useridd = ($res[0]['userid']);
+                $userid = isset($res[0]['userid']) ? $res[0]['userid'] : $userid;
 
                 if (!empty($useridd))
                 {
@@ -117,7 +117,7 @@ if (isset($_POST['email_change']))
                 $arr = array($hash, $userid);
                 if ($sql->execute($arr) === TRUE)
                 {
-                    $del = $con->prepare("DELETE FROM token_t WHERE token = '$user'");
+                    $del = $con->prepare("DELETE FROM token_t WHERE token = '$userid'");
                     if ($del->execute())
                     {
                         echo '<script>alert("password updated!")</script>';

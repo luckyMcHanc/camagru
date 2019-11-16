@@ -10,9 +10,10 @@ require("includes/signup_inc.php");
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<body style=" background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg'); color:white;">
     <main>
     <br />
+    
     <div class="container" id="wrap">
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3 container-fluid">

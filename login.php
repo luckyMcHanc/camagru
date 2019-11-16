@@ -2,7 +2,7 @@
 require("header.php");
 require("includes/login_inc.php");
 ?>
-<body>
+<body style=" background-image: url('https://repository-images.githubusercontent.com/185094183/ff64fd00-706f-11e9-9b53-d05acb2d0989'); color:white;"> 
 <div class = "login">
 <div class="container">
         <div class = "row">

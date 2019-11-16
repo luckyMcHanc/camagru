@@ -24,3 +24,11 @@
     width: 100%;
     border: 1px solid #F2F2F2;
 }
+hTML BODY{
+    background-size: cover;
+    background-repeat: repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    background-color: #DDDDDD;
+    
+    }

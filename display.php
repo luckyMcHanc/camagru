@@ -67,7 +67,7 @@ try
                         if ($post->execute([$pers]))
                         {
                             $p = $post->fetchAll();
-                            print_r($p);
+                           // print_r($p);
                             echo $p[0]['userid']." Date: ".$v['time']; 
                         }
                     ?>
@@ -103,6 +103,7 @@ try
                     <!-- </form> -->
                     </div>
                 </div>
+    
                     <?php
                         $try = $con->prepare("SELECT userid, comments FROM comments WHERE imageid = ? ");
                         $a = array( $v['imageid']);
@@ -229,4 +230,5 @@ catch(PODEXception $e)
                   </div>
               </div>
                 <script src="js/likes.js"></script>
+    </div>
 </body>
