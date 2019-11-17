@@ -18,16 +18,14 @@ require("includes/likes.php")
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <!-- <link rel="stylesheet" href="css/filters.css" /> -->
-  <!-- <link rel="stylesheet" href="css/main.css" /> -->
-
+  
 </head>
 <body>
     <div class="container">
     <br />
     <?php require("upload_m.php"); ?>
     <div class = "row">
-      <div class = "col-md-6">
+      <div class = "col-md-6" id = "image">
         <form method = "post" action = "camera.php">
                     <video id="video" autoplay class="embed-responsive">Something went wrong while streaming</video>
                     <div class = "form-group">
@@ -47,7 +45,7 @@ require("includes/likes.php")
 
 <hr class="mt-2 mb-5">
 
-<div class="row text-center text-lg-left">
+<div class="row text-center text-lg-left" id = "del">
       <?php
         require 'includes/connect.php';
         $im = $con->prepare("SELECT * FROM images WHERE userid  = ? order by time DESC");
@@ -60,28 +58,18 @@ require("includes/likes.php")
             <hr style = "opacity:0;">
 
             <div class="col-lg-3 col-md-4 col-6">
-              <form method="post">
-                <button class="btn btn-default" style = "width : 120px; height : 130px;" name = "delete">
+              <!-- <form method="post"> -->
+                <button class="btn btn-default" style = "width : 120px; height : 130px;" name = "delete"  onclick="delpic(<?php echo $image['imageid']; ?>)">
                   <div  class="d-block mb-4 h-100">
                         <input type = "hidden" value="<?php echo $image['imageid']; ?>" name  = "id">
                         <img class="img-fluid img-thumbnail" src="<?php echo $image['target']; ?>" alt="" style = "width : 250px; height : 130px;">
                   </div>
                 </button>
-              </form>
+              <!-- </form> -->
                 </div>
             <?php
-        }
-          
-        }
-      //   $dirname = "uploads/";
-      //   $images = glob($dirname."*.jpeg");
-      //   foreach($images as $image) {
-      //     ?>
-      <!-- //     <hr style = "opacity:0;">
-      //     <img src= "<?php echo $image ?>" class="img-thumbnail float-left" style="width: 300px;height: 300px;display: block;">
-      //     <br> -->
-           <?php
-      // }
+        }  
+      }
     ?>
         </div>
 
@@ -100,10 +88,12 @@ require("includes/likes.php")
 
       $_SESSION['url'] = $_POST["url"];
      $_SESSION['done'] = "0";
-      echo '<script>window.location= "discam.php"</script>';
+     echo '<script>window.location= "discam.php"</script>';
     }
     ?>
+     <script src="js/likes.js"></script>
     <script src="js/capture.js"></script>
+   
 </body>
 <?php
     require('footer.html');

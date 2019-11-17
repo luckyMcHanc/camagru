@@ -41,7 +41,6 @@ if(isset($_GET['id']))
                     $res = $like->fetchAll();
                     echo $res[0]["co"];
                 }
-               // echo '<script>window.location="home.php"</script>';
             }
         }
     }
@@ -53,7 +52,7 @@ if(isset($_GET['id']))
     unset($_GET['id']);
 }
 
-if (isset($_POST['commet']))
+if(isset($_POST['commet']))
 {
     $id = $_POST['id'];
     $comment = strip_tags($_POST['comment']);
@@ -92,25 +91,4 @@ if (isset($_POST['commet']))
     }
 }
 
-if (isset($_POST['delete']))
-{
-    $del = $_POST['id'];
-
-   // echo $del;
-   // die();
-    include_once('connect.php');
-    $sql = $con->prepare("DELETE FROM images WHERE imageid = ?");
-   // $sql = $con->prepare("DELETE FROM comments WHERE imageid = ?");
-
-    if ($sql->execute([$del]))
-    {
-        echo '<script>alert("Deleted")</script>';
-        echo '<script>window.location="camera.php"</script>';
-    }
-    else
-    {
-        echo '<script>alert(Could not delete)</script>';
-        echo '<script>window.location="camera.php"</script>';
-    }
-}
 ?>
