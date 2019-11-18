@@ -60,12 +60,12 @@ function delpic(id)
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("del").innerHTML = this.responseText;
+            alert("Image Deleted");
         }
     };
     var query = "?id="+id;
     request.open("GET", "includes/del.php" + query, true);
     request.send(); 
-   alert("Image Deleted");
 }
 
 function comments(id, user, im)
@@ -102,7 +102,7 @@ function comments(id, user, im)
     query +="&comment="+comment;
     query +="&userid="+user;
 
-    alert(im);
+   // alert(im);
    // request.open("GET", "includes/comment.php" + query, true);
    // request.send(); 
   // alert("Image Deleted");

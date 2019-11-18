@@ -1,5 +1,4 @@
-
-let width = 500,
+    let width = 500,
     height = 0,
     filter = 'none',
     sticker = 'none',
@@ -11,7 +10,7 @@ let width = 500,
   const thumbnail = document.getElementById('thumbnail');
   const addfilter = document.getElementById('filters');
   const clear = document.getElementById('clear');
-  //const addsticker = document.getElementById('stickers');
+
 
   navigator.mediaDevices.getUserMedia({video: true, audio: false})
 
@@ -46,32 +45,6 @@ let width = 500,
     e.preventDefault();
   }, false);
 
-  // addfilter.addEventListener('change', function(e)
-  // {
-  //  filter = e.target.value;
-  //  video.style.filter = filter;
-  //  e.preventDefault();
-  // });
-
-  // addsticker.addEventListener('change', function(e)
-  // {
-  //  sticker = e.target.value;
-  //  overlay.src = sticker;
-  //  e.preventDefault();
-  // });
-
-  // clear.addEventListener('click', function(e)
-  // {
-  //   thumbnail.innerHTML = '';
-  //   addsticker.innerHTML = '';
-  //   filter = 'none';
-  //  // sticker = 'none';
-  //   video.style.filter = filter;
-  //  // overlay.src = sticker;
-  //   addfilter.selectedIndex = 0;
-  // //  addsticker.selectedIndex = 0;
-  // }
-  // )
 
   function captureImage()
   {
@@ -91,25 +64,14 @@ let width = 500,
       const image = document.createElement('img');
       image.setAttribute('src', imgUrl);
 
-
-    //  image.style.filter = filter;
-      //image.overlay.src = sticker;
       thumbnail.appendChild(image);
 
       var queryString = "?p=" + imgUrl;
-   //   window.location = "discam.php" + queryString;
+ 
       document.getElementById("url").value = imgUrl;
-     // document.getElementById("url").value = window.location.search;
-
-    //  alert("dfgdfgfd");
-      //document.write(imgUrl);
 
 
-      video.srcObject = stream;
-      video.pause();
-      //  vid.pause();
-       // vid.src = "";
-       // localstream.stop();
-
+     // video.srcObject = stream;
+      //video.pause();
     }
   }

@@ -4,15 +4,15 @@ if(!isset($_SESSION))
 {
     session_start();
 }
-if (isset($_POST['email_change']))
+if (isset($_GET['email_change']))
 {
     include_once("connect.php");
 
-        $change = $_POST['email'];
+        $change = $_GET['email'];
         $userid = $_SESSION['login'];
         if (!filter_var($change, FILTER_VALIDATE_EMAIL))
         {
-            echo '<script>alert("Invalid Email")</script>';
+           // echo '<script>alert("Invalid Email")</script>';
             exit();
         }
         else
@@ -23,9 +23,9 @@ if (isset($_POST['email_change']))
                 $arr = array($change, $userid);
                 if ($sql->execute($arr) === TRUE)
                 {
-                    echo '<script>alert("Your email has been change!")</script>';
-                    echo '<script>window.location = "changedetails.php"</script>';
                     mail($change, "Email Changed", "Your email has been changed");
+                    echo ' <input type="email" class="form-control input-lg" id = "email" maxlength = "40" placeholder="enter new email" required>';
+                   echo '<script>alert("changedetails.php")</script>';
                 }
                 else
                 {
@@ -40,11 +40,11 @@ if (isset($_POST['email_change']))
         }
     }
 
-    if (isset($_POST['user']))
+    if (isset($_GET['user']))
 {
     include_once("connect.php");
 
-        $change = $_POST['username'];
+        $change = $_GET['username'];
         $userid = $_SESSION['login'];
        
             try
@@ -53,8 +53,9 @@ if (isset($_POST['email_change']))
                 $arr = array($change, $userid);
                 if ($sql->execute($arr) === TRUE)
                 {
-                    echo '<script>alert("Your username has been change!")</script>';
-                    echo '<script>window.location = "changedetails.php"</script>';
+                    echo '<input type="text" class="form-control input-lg" id = "username" maxlength = "40" placeholder="enter new username" required>';
+                    // echo '<script>alert("Your username has been change!")</script>';
+                    // echo '<script>window.location = "changedetails.php"</script>';
                  //   mail($change, "Email Changed", "Your email has been changed");
                 }
                 else
@@ -68,6 +69,7 @@ if (isset($_POST['email_change']))
                     echo "erro".$e;
             }
         }
+
     if (isset($_POST['update']))
     {
         function validPass($password)
@@ -135,10 +137,10 @@ if (isset($_POST['email_change']))
             }
         }
     }
-    if (isset($_POST['notific']))
+    if (isset($_GET['notific']))
     {
         require 'connect.php';
-        $cha = $_POST['notif'];
+        $cha = $_GET['notif'];
         if (!empty($cha))
         {
             if (!strcmp($cha, "yes"))
@@ -147,7 +149,16 @@ if (isset($_POST['email_change']))
                 $sql = $con->prepare("UPDATE users SET notific = 1 WHERE id = ?");
                 if ($sql->execute([$_SESSION['login']]))
                 {
-                    echo '<script>alert("Infomation Changed.!")</script>';
+                    echo '<div class ="col-md-4">
+                    <label class="radio-inline">
+                        <input class="checkbox-inline" type="radio" name="notif" value="yes"> YES
+                    </label>
+                </div>
+                <div class ="col-md-4">
+                    <label class="radio-inline">
+                        <input class="checkbox-inline" type="radio" name="notif" value="no"> NO
+                    </label>
+                </div>';
                 }
             }
             else
@@ -155,7 +166,16 @@ if (isset($_POST['email_change']))
                 $sql = $con->prepare("UPDATE users SET notific = 0 WHERE id = ?");
                 if ($sql->execute([$_SESSION['login']]))
                 {
-                    echo '<script>alert("Infomation Changed.!")</script>';
+                    echo '<div class ="col-md-4">
+                    <label class="radio-inline">
+                        <input class="checkbox-inline" type="radio" name="notif" value="yes"> YES
+                    </label>
+                </div>
+                <div class ="col-md-4">
+                    <label class="radio-inline">
+                        <input class="checkbox-inline" type="radio" name="notif" value="no"> NO
+                    </label>
+                </div>';
                 }
             }
         }
